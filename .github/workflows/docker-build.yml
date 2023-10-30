@@ -34,7 +34,7 @@ jobs:
         run: npm install
 
       - name: run test
-        run: npm run test
+        run: npm run test 
 
   build:
     needs: test
@@ -65,7 +65,7 @@ jobs:
     needs: build
     runs-on: [self-hosted, blk]
     steps:
-    - name: Run Docker
-      run: |
-        docker stop ${{env.DOCKER_CONTAINER}}  && docker rm ${{env.DOCKER_CONTAINER}}  && docker rmi ${{env.DOCKER_IMAGE}}:latest
-        docker run -d -p 3000:3000 --name ${{env.DOCKER_CONTAINER}} --restart always ${{env.DOCKER_IMAGE}}:latest
+      - name: Run Docker
+        run: |
+          docker stop ${{env.DOCKER_CONTAINER}}  && docker rm ${{env.DOCKER_CONTAINER}}  && docker rmi ${{env.DOCKER_IMAGE}}:latest
+          docker run -d -p 3000:3000 --name ${{env.DOCKER_CONTAINER}} --restart always ${{env.DOCKER_IMAGE}}:latest
